@@ -25,8 +25,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Container className="main-container">
-            <Header />
-            <TimeTable />
+            <TimeTable className="timetable"/>
           </Container>
         </header>
       </div>

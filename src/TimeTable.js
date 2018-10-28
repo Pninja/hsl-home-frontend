@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Icon } from 'semantic-ui-react'
 
 const TimeTable = () => (
-    <Table inverted>
+    <Table inverted padded='very' color='black'>
 
         <Table.Header>
         <Table.Row>
