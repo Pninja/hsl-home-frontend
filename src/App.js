@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Container } from 'semantic-ui-react'
-import Header from './Header'
+// import Header from './Header'
 import TimeTable from './TimeTable'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = { 
-      arrivals: null
+      arrivals: null,
+      time: null
     }
   }
 
   componentDidMount() {
-    // Register event listener
+    // Register event listener: TODO
+    // Set current time
+    setInterval(
+      () => this.setTime(),
+      1000
+    );
+    
   }
 
   componentWillUnmount() {
-    // Unregister event listener
+    // Unregister event listener: TODO
+  }
+
+  setTime() {
+    const time = new Date()
+    const clock = time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+    this.setState({ time: clock })
   }
 
   render() {
@@ -25,7 +38,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Container className="main-container">
-            <TimeTable className="timetable"/>
+            <TimeTable time={this.state.time}/>
           </Container>
         </header>
       </div>
