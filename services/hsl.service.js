@@ -1,7 +1,7 @@
 var evtSource = new EventSource ('')
 
 const registerEventListener = (handler) => {
-
+    console.log('trying to open event listener!')
     evtSource.onopen = e => {
         console.log('connected!')
         console.log(e)
