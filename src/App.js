@@ -17,9 +17,11 @@ class App extends Component {
 
   componentDidMount() {
     // Register event listener
-    const endpoint = 'http://127.0.0.1:6009'
-    // const socket = socketIOClient(endpoint)
-    // socket.on("FromAPI", data => this.eventHandler(data))
+    const endpoint = 'http://localhost:6009'
+    const socket = socketIOClient(endpoint)
+    socket.on('connect', () => console.log('connected!'))
+    socket.on('FromAPI', data => this.eventHandler(data))
+    
     // registerEventListener(this.eventHandler)
     // Set current time
     setInterval(
