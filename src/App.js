@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Container } from 'semantic-ui-react'
-// import Header from './Header'
 import TimeTable from './TimeTable'
 import socketIOClient from 'socket.io-client'
-// import { registerEventListener, unregisterEventListener } from './services/hsl.service'
 
 class App extends Component {
   constructor(props) {
@@ -17,22 +15,20 @@ class App extends Component {
 
   componentDidMount() {
     // Register event listener
-    const endpoint = 'http://localhost:6009'
-    const socket = socketIOClient(endpoint)
-    socket.on('connect', () => console.log('connected!'))
-    socket.on('FromAPI', data => this.eventHandler(data))
-    
-    // registerEventListener(this.eventHandler)
+    this.registerSocket()
     // Set current time
-    setInterval(
-      () => this.setTime(),
-      1000
-    );
-    
+    setInterval(() => this.setTime(), 1000);
   }
 
   componentWillUnmount() {
     // Unregister event listener
+  }
+
+  registerSocket() {
+    const endpoint = 'http://localhost:6009'
+    const socket = socketIOClient(endpoint)
+    socket.on('connect', () => console.log('connected!'))
+    socket.on('FromAPI', data => this.eventHandler(data))
   }
 
   eventHandler(data) {
