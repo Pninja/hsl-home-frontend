@@ -3,7 +3,8 @@ import './App.css';
 import { Container } from 'semantic-ui-react'
 // import Header from './Header'
 import TimeTable from './TimeTable'
-// import { registerEventListener, unregisterEventListener } from '../services/hsl.service'
+import socketIOClient from 'socket.io-client'
+// import { registerEventListener, unregisterEventListener } from './services/hsl.service'
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // Register event listener: TODO
+    // Register event listener
+    const endpoint = 'http://127.0.0.1:6009'
+    // const socket = socketIOClient(endpoint)
+    // socket.on("FromAPI", data => this.eventHandler(data))
+    // registerEventListener(this.eventHandler)
     // Set current time
     setInterval(
       () => this.setTime(),
@@ -25,7 +30,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // Unregister event listener: TODO
+    // Unregister event listener
   }
 
   eventHandler(data) {
@@ -45,7 +50,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Container className="main-container">
-            <TimeTable time={this.state.time}/>
+            <TimeTable time={this.state.time} arrivals={this.state.arrivals}/>
           </Container>
         </header>
       </div>

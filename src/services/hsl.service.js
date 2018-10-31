@@ -1,4 +1,4 @@
-var evtSource = new EventSource ('')
+var evtSource = new EventSource ('http://127.0.0.1:6009')
 
 const registerEventListener = (handler) => {
     console.log('trying to open event listener!')
