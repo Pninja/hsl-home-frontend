@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table, Icon, Dimmer, Loader } from 'semantic-ui-react'
-// import data from './mockData'
 
 const getTime = (serviceDay, realtimeDeparture) => {
     var now = new Date()
@@ -14,15 +13,23 @@ const getBusNumber = (headsign) => ( headsign === 'Kalasatama(M)' ? '56' : '55' 
 
 const getRealTimeIcon = (arrival) => ( arrival.realtime ? <Icon name="rss"/> : '' )
 
-const TableRows = ({ data }) => ( data.arrivalList.map((arrival, index) => {
+const getColor = (nextDeparture) => (
+    nextDeparture < 3 ? 'red' 
+    : nextDeparture >= 3 && nextDeparture < 5 ? 'yellow'
+    : 'green'
+)
+
+const TableRows = ({ data }) => ( data.arrivalList.slice(0,4).map((arrival, index) => {
         const nextDeparture = getTime(arrival.serviceDay, arrival.realtimeDeparture)
         const busNumber = getBusNumber(arrival.headsign)
         const icon = getRealTimeIcon(arrival)
+        const style = {color : getColor(nextDeparture)}
+        
         if (index === 0) {
             return (
                 <Table.Row active key={arrival.realtimeArrival}>
                     <Table.Cell><h1><Icon name="bus"/>{ busNumber }</h1></Table.Cell>
-                    <Table.Cell><h1>{ nextDeparture } min { icon }</h1> </Table.Cell>
+                    <Table.Cell><h1 style={style}>{ nextDeparture } min { icon }</h1> </Table.Cell>
                 </Table.Row>
             )
         } 
