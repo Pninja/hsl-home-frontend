@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Container } from 'semantic-ui-react'
 import TimeTable from './TimeTable'
+// import Header from './Header'
 import socketIOClient from 'socket.io-client'
 
 class App extends Component {

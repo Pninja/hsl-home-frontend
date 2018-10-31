@@ -23,12 +23,12 @@ const TableRows = ({ data }) => ( data.arrivalList.slice(0,4).map((arrival, inde
         const nextDeparture = getTime(arrival.serviceDay, arrival.realtimeDeparture)
         const busNumber = getBusNumber(arrival.headsign)
         const icon = getRealTimeIcon(arrival)
-        const style = {color : getColor(nextDeparture)}
+        const style = { color : getColor(nextDeparture), fontSize: "40px" }
         
         if (index === 0) {
             return (
                 <Table.Row active key={arrival.realtimeArrival}>
-                    <Table.Cell><h1><Icon name="bus"/>{ busNumber }</h1></Table.Cell>
+                    <Table.Cell><h1 style={{fontSize: "40px"}}><Icon name="bus"/>{ busNumber }</h1></Table.Cell>
                     <Table.Cell><h1 style={style}>{ nextDeparture } min { icon }</h1> </Table.Cell>
                 </Table.Row>
             )
