@@ -42,7 +42,7 @@ const TableRows = ({ data }) => ( data.arrivalList.slice(0,4).map((arrival, inde
     })
 )
 
-const TimeTable = ({time, arrivals}) => {
+const TimeTable = ({time, arrivals, disconnected}) => {
     if (arrivals) {
         console.log(arrivals)
         return (
@@ -56,6 +56,12 @@ const TimeTable = ({time, arrivals}) => {
                     <TableRows data={arrivals} />
                 </Table.Body>
             </Table>
+        )
+    } else if (disconnected) {
+        return (
+            <Dimmer active>
+                Data stream disconnected!
+            </Dimmer>
         )
     }
     return (

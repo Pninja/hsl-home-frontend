@@ -10,7 +10,8 @@ class App extends Component {
     super(props)
     this.state = { 
       arrivals: null,
-      time: null
+      time: null,
+      disconnected: false
     }
   }
 
@@ -21,20 +22,15 @@ class App extends Component {
     setInterval(() => this.setTime(), 1000);
   }
 
-  componentWillUnmount() {
-    // Unregister event listener
-  }
-
   registerSocket() {
     const endpoint = 'http://localhost:6009'
     const socket = socketIOClient(endpoint)
-    socket.on('connect', () => console.log('connected!'))
-    socket.on('FromAPI', data => this.eventHandler(data))
-  }
-
-  eventHandler(data) {
-    // Handle event data
-    this.setState({arrivals: data})
+    socket.on('connect', () => {
+      console.log('connected!')
+      this.setState({disconnected: false})
+    })
+    socket.on('FromAPI', data => this.setState({arrivals: data}))
+    socket.on('disconnect', () => this.setState({ arrivals: null, disconnected: true }))
   }
 
   setTime() {
@@ -49,7 +45,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Container className="main-container">
-            <TimeTable time={this.state.time} arrivals={this.state.arrivals}/>
+            <TimeTable 
+              time={this.state.time} 
+              arrivals={this.state.arrivals} 
+              disconnected={this.state.disconnected}
+            />
           </Container>
         </header>
       </div>
